@@ -1,11 +1,13 @@
-![shieldsIO](https://img.shields.io/github/issues/Fictizia/Curso-JS-para-desarrolladores-web_ed8.svg)
-![shieldsIO](https://img.shields.io/github/forks/Fictizia/Curso-JS-para-desarrolladores-web_ed8.svg)
-![shieldsIO](https://img.shields.io/github/stars/Fictizia/Curso-JS-para-desarrolladores-web_ed8.svg)
+![shieldsIO](https://img.shields.io/github/issues/Fictizia/Curso-JS-para-desarrolladores-web_ed9.svg)
+![shieldsIO](https://img.shields.io/github/forks/Fictizia/Curso-JS-para-desarrolladores-web_ed9.svg)
+![shieldsIO](https://img.shields.io/github/stars/Fictizia/Curso-JS-para-desarrolladores-web_ed9.svg)
+
+<img src="/imagenes/fictizia.png" alt="Fictizia" width="300"/>
 
 # JavaScript para desarrolladores web
 ### Programación con JavaScript, Manejo del DOM, Aplicaciones interactivas con AJAX, vanilla JS.
 
-<img src="/imagenes/fictizia.png" alt="Fictizia" width="300"/>
+
 
 ![WideImg](http://www.fictizia.com/assets/styles/styleImgs/wideBox/widebox_js.png)
 
