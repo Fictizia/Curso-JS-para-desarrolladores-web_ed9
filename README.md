@@ -33,7 +33,8 @@ Como metodología de trabajo durante el curso, los alumnos desarrollarán como p
 Sobre el Curso
 =================
 * Horario: Martes y Jueves de 19h a 22h
-* Fechas: 19/10/2017 - 07/12/2017
+* Fechas: 19/10/2017 - 14/12/2017
+* No lectivos: 09/11/2017 y 07/12/2017
 
 
 Teoría y Recursos
