@@ -169,7 +169,6 @@
 	- [Coffeescript](http://coffeescript.org/)
 	- [Typescript](http://www.typescriptlang.org/)
   - [Dart](https://www.dartlang.org/)
-	- [Livescript](http://livescript.net/)
 
 - **Librerías**
 	- [Jquery](https://jquery.com/)
