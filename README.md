@@ -5,7 +5,8 @@
 # JavaScript para desarrolladores web
 ### Programación con JavaScript, Manejo del DOM, Aplicaciones interactivas con AJAX, vanilla JS.
 
-![Fictizia Logo](/imagenes/fictizia.png =300x)
+![Fictizia Logo]()
+<img src="/imagenes/fictizia.png" alt="Fictizia" style="width: 300px;"/>
 
 ![WideImg](http://www.fictizia.com/assets/styles/styleImgs/wideBox/widebox_js.png)
 
