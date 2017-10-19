@@ -121,6 +121,4 @@ Temario
 
 **Herramientas**
 * [Github](https://github.com/)
-* [Cloud 9](https://c9.io/ulisesgascon)
-* [JSHint](http://www.jshint.com/)
 * [Mastering MarkDown](https://guides.github.com/features/mastering-markdown/)
