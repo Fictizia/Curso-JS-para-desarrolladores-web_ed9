@@ -260,27 +260,19 @@ si no
 
 **4 -** Diseña un programa que lea tres números distintos y nos diga cual de ellos es el mayor.
 ```
-Proceso compararVariosNumeros
-	Escribir "El primer número:"
-	Leer valor1
-	
-	Escribir "El segundo valor:"
-	Leer valor2
-	
-	Escribir "El tercer valor:"
-	Leer valor3
-	
-	Si (valor1 > valor2) & (valor1 > valor3) Entonces
-		Escribir valor1, " es mayor"
-	Sino
-		Si valor2 > valor3 Entonces
-			Escribir valor2, " es mayor"
-		Sino
-			Escribir valor3, " es mayor"
-		Fin Si
-	Fin Si
-	
-FinProceso
+pedir @numero1
+pedir @numero2
+pedir @numero3
+
+si @numero1 > @numero2
+	si @numero1 > @numero3
+		mostrar @numero1
+pero si @numero2 > @numero1
+	si @numero2 > @numero3
+		mostrar @numero2
+si @numero3 > @numero1
+	si @numero3 > @numero2
+		mostrar @numero3
 ```
 
 **5 -** Diseña un programa que siga el siguiente proceso:
