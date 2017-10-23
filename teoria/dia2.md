@@ -281,25 +281,19 @@ si @numero3 > @numero1
 - Si no multiplicará los tres numeros
 - Mostrar el resultado final incluyendo una referencia a la operación realizada.
 ```
-	Proceso jugandoConNumeros
-	    Escribir "El primer número:"
-	    Leer valor1
-		
-	    Escribir "El segundo valor:"
-	    Leer valor2
-		
-		Escribir "El tercer valor:"
-	    Leer valor3
-		
-		Si valor1 < 0 Entonces
-			calculo <- valor2 + valor3
-			Escribir "El resutlado de la suma es ", calculo
-		Sino 
-			calculo <- valor1 * valor2 * valor3
-			Escribir "El resutlado de la multiplicacion es ", calculo		
-		FinSi
 	
-	FinProceso
+pedir @valor1
+pedir @valor2
+pedir @valor3
+
+si @valor1 < 0
+	@calculo = @valor2 + @valor3
+	mostrar "El resutlado de la suma es :"
+	mostrar @calculo
+si no
+	@calculo = @valor1 * @valor2 * @valor3
+	mostrar "El resutlado de la multiplicacion es: "
+	mostrar @calculo
 ```
 
 6 - Diseña un algoritmo que aplique al precio de un producto un descuento cuando se den las siguientes caracteristicas.
