@@ -247,26 +247,15 @@ mostrar #mediahombres @totalhombres y @totalmujeres
 
 **3 -** Diseña un programa que lea dos números y los compare. Como resultado esperamos que nos diga cual es mayor... o si son iguales.
 ```
-Proceso compararNumeros
-	Escribir "El primer número:"
-	Leer valor1
-	
-	Escribir "El segundo valor:"
-	Leer valor2
-	
-	Si valor1 > valor2 Entonces
-		Escribir valor1, " es mayor"
-	Fin Si
-	
-	Si valor1 < valor2 Entonces
-		Escribir valor2, " es mayor"
-	Fin Si
-	
-	Si valor1 = valor2 Entonces
-		Escribir "son iguales"
-	Fin Si
-	
-FinProceso
+pedir @numero1
+pedir @numero2
+
+si @numero1 > @numero2
+	mostrar @numero1
+pero si @numero1 < @numero2
+	mostrar @numero2
+si no
+	mostrar "Son iguales"
 ```
 
 **4 -** Diseña un programa que lea tres números distintos y nos diga cual de ellos es el mayor.
