@@ -334,17 +334,12 @@ si no
 
 8 - Diseña un algoritmo que al  introducir un numero por teclado. Que nos diga si es par o impar.
 ```
-	Proceso esPar
-		Escribir "Dame un número:"
-		Leer numero
-		
-		Si numero %2 = 0 Entonces
-			Escribir numero, " es par"
-		Sino 
-			Escribir numero, " es impar"
-		FinSi
-	
-	FinProceso
+	pedir @numero
+
+si @numero % 2 == 0
+	mostrar @numero + " es par"
+si no
+	mostrar @numero + " es impar"
 ```
 
 9 -  Diseña un algoritmo para identificar a los clientes autorizados a entrar a nuestro sistema.
