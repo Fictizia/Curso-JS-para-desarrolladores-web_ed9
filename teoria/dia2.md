@@ -360,7 +360,7 @@ si no
 	- Convertimos el número del mes, en el nombre del mes real y devolvemos la fecha en el siguiente formato ( DD de MES de AAAA)
 ```
 	Tu Programa aquí
-					fechaDetalle <- ConvertirATexto(day) + "de Octubre de " + ConvertirATexto(year)
+					
 ```
 
 11 - Diseña un algoritmo introducido un numero y pasarlo a número romanos.
