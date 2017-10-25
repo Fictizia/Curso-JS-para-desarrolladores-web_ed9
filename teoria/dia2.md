@@ -371,3 +371,7 @@ si no
 ```
 	Programa de nota
 ```
+
+## RECAPITULACIÓN AL PRINCIPIO DEL SIGUIENTE DOCUMENTO
+[Teoría da 3](./dia3.md)
+```
