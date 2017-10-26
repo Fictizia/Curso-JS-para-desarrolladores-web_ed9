@@ -1,0 +1,7 @@
+for (contador = 1; contador <= 10; contador++){				
+		console.log('Tabla del ' + contador + ':');
+		for(operando = 1; operando <= 10; operando++){
+			console.log(contador + ' X ' + operando + ' = ' + contador*operando);
+		}
+		console.log(' ');
+}
