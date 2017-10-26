@@ -443,3 +443,42 @@ Formato | Descripción
   console.log('Esto es aburrido...');
   console.log('%c Pero se puede mejorar fácilmente! ', 'background: #3EBDFF; color: #FFF; font-size:25px;');
  ```
+ 
+ # ANEXO EJERCICIO 5
+ 
+ Solucion de todos:
+ 
+ ```
+ function isPair(number){
+	if(number % 2 == 0){
+		return true
+	} else{
+		return false	
+	}
+	 
+}
+
+function showOdds (number){
+	var limit = number + 50;
+	
+	if(isPair(number)){
+			
+		number ++
+
+		for(number;number<limit;number= number+2){
+			console.log(number)
+			// number=number+2
+		
+		}
+	}	 
+	else {
+		for(number;number<=limit;number= number +2){
+			console.log(number)	
+		}
+	}
+	
+}
+ 
+ ```
+
+ - *%O* para objectos JS
