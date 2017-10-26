@@ -93,6 +93,23 @@ El tercer elemento (i++) se ejecuta justo al final del bucle, justo antes de vol
 
 ```
 
+### WTF JS
+
+Preguntado varias veces en clase, vamos a detallar algunos comportamientos del lenguaje por los cuales es ampliamente criticado, aún así... Javascript me encanta.
+
+Las próximas lineas no son para memorizarlas, sino para comprender que como todo, ninguna herramienta es perfecta
+
+Escribir en consola y comentar resultados:
+
+- [] == false
+- "" == false
+- Number(true)
+- +true
+- null == undefined
+- Array(16).join("Wtf")
+- Array(16).join("Wtf" -1) + " Batman!"
+
+
 
 ### Ejercicios
 
