@@ -1,25 +1,71 @@
 # Clase 4
 
-## Eventos
+## Recapitulando
 
-### Open Source Weekends (OSWeekends)
+### Colaborar en un proyecto en github
 
-![company](https://pbs.twimg.com/media/DBQZzZeW0AEPx8k.jpg)
+- Fork del proyecto en tu cuenta (botón arriba a la derecha)
+- Ahora el proyecto es "tuyo"
+- Clonar TU repositorio (git clone +{{url}})
+- Hacer los cambios pertinentes.
+- git pull (por si estas colaborando con mas gente).
+- git add . (meter cambios)
+- git commit -m "comentario"
+- git push
+- Ahora ya lo tienes en tu repositorio
+- Ve al repositorio ORIGINAL al que quieres participar
+- pinchar en "pull request"
+- En las opciones elegir "from forked"
+- Elegir tu repositorio
+- Comentar y aceptar
+- El propietario del proyecto aceptará o no tus cambios.
 
-**Lugar**
-- [Campus Madrid](https://www.campus.co/madrid/en)
 
-**Fecha**
-- Sábado, 10 de Junio. 10:30-14:30
+### Crear tu propio repositorio y trabajar con el
+- Crear el repositorio
+- clonar
+- "opcional" Crear un branch
+- hacer cambios
+- git pull
+- git add .
+- git commit -m "comentario"
+- git push
+- En el caso de estar trabajando en un branch mergear
 
-**Contenido**
-- Charla de CSS Grid Layout con [Ignacio Villanueva (@IgnaciodeNuevo)](https://twitter.com/IgnaciodeNuevo)
-- Charla de RabbitMQ con [Yoel Macia (@____ymd____)](https://twitter.com/____ymd____)
-- Charla R Lang con [Bea (@Chucheria)](https://twitter.com/Chucheria)
+## Recapitualndo Scope.
 
-**Apuntate**
-- [Meetup](https://www.meetup.com/Open-Source-Weekends/events/240131792/)
-- [Slack](https://invitations-osweekends.herokuapp.com/)
+El "scope" o alcance de la variable define donde una variable es "visible".
+
+Imaginemos que nuestro programa es como una mansión.
+
+Esa mansión es de mi Madre, que me permite vivir en la casa de la piscina.
+Así mismo en una de las habitaciones de la casa de la piscina vive mi hijo.
+
+Mi Madre siempre ha respetado mucho la intimidad, por lo que solo sabrá lo que pasa en la casa de la piscina si yo se lo cuento.
+
+Yo siguiendo el ejemplo de mi Madre, también soy muy discreto, por lo que solo sabré lo que pasa en la habitación si mi hijo me lo cuenta
+
+Pero además a mi Padre le gusta mucho contarnos todo, por lo que nosotros siempre sabemos lo que pasa en la mansión (fuera de la casa de la piscina).
+
+Yo que me llevo muy bien con mi hijo,le cuento siempre a el todo lo que pasa en la casa de la piscina, aunque no siempre a mis Padres.
+
+Por lo tanto, nosotros siempre sabemos lo que pasa en la mansión (scope global) y mis padres solo saben lo que yo les cuento (scope dentro de la función), y mi hijo sabe todo lo que pasa en todas partes porque es muy chismoso (será el gen vigilante)
+
+La casa es una función, contar algo es hacer return.
+
+Así mismo, mi hijo puede contarme a mi algo y yo decidir si se lo cuento a mis padres o no.
+
+
+- De manera mas "técnica":
+
+Tengo un grupo Padre que es el scope global, este grupo puede tener subgrupos.
+
+Los subgrupos siempre saben lo que contiene el padre, pero el padre no tiene porque saber lo que hay dentro del subgrupo a no ser que tengan un return.
+
+Los subgrupos además pueden tener sub-subgrupos, que se rigen por las mismas normas... los sub-subgrupos sabran lo que hay en SU subgrupo y en el grupo Padre.
+
+Pero el subgrupo solo sabrá lo que hay en el sub-subgrupo si este tiene un return, y el grupo padre solo sabrá lo que pasa dentro del sub-subgrupo si este ha pasado la info al subgrupo y este a su vez al grupo Padre.
+
 
 
 ### Caracteres especiales:
