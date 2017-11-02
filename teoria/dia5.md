@@ -64,3 +64,40 @@ async function imprimeEnorden(){
 
 imprimeEnorden();
 ```
+
+## mas async await:
+
+```javascript
+async function primerPaso(numero){
+  return numero * 2;
+  
+}
+
+async function segundoPaso(numeroXdos){
+  return numeroXdos + 5;
+  
+}
+
+async function tercerPaso(numMasCinco){
+  return numMasCinco * numMasCinco;
+  
+}
+
+async function ultimoPaso(numAlCuadrado){
+  return { ultimo: numAlCuadrado +100 };
+}
+
+async function zasca (num){
+  const primer = await primerPaso(num);
+  console.log(primer);
+  const segun = await segundoPaso(primer);
+  console.log(segun);
+  const tercer = await tercerPaso(segun);
+  console.log(tercer);
+  const result = await ultimoPaso(tercer);
+  console.log ("El resultado es: ",result.ultimo);
+}
+
+
+zasca(4);
+```
