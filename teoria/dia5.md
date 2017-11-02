@@ -1,5 +1,35 @@
 # Asincronía gustaría me aprender
 
+## Callback:
+
+```javascript
+function primerPaso(numero,callback){
+  numero = numero * 2;
+  console.log("lo multiplicamos por 2: ",numero);
+  callback(numero,tercerPaso);
+}
+
+function segundoPaso(numeroXdos,callback){
+  numeroXdos = numeroXdos + 5;
+  console.log("Le sumamos 5: ",numeroXdos)
+  callback(numeroXdos,ultimoPaso);
+}
+
+function tercerPaso(numMasCinco,callback){
+  numMasCinco = numMasCinco * numMasCinco;
+  console.log("numero al cuadrado: ",numMasCinco)
+  callback(numMasCinco);
+}
+
+function ultimoPaso(numAlCuadrado,callback){
+  console.log("Ultimo paso: ",numAlCuadrado +100)
+}
+
+primerPaso(4,segundoPaso);
+
+console.log("XXXXXXXXXXXXXXXXXXXX");
+```
+
 ## async await
 
 ```javascript
