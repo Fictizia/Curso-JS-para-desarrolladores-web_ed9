@@ -200,6 +200,8 @@ async function datosParsed(){
 
 const a = datosParsed();
 
+// const a = await pilladatos(); <- funciona en chrome
+
 ```
 
 - fetch sirve también para hacer llamadas POST, PUT, PATCH, DELETE:
