@@ -1,10 +1,31 @@
-#Recapitulamos
+# Recapitulamos
 
 En esta ocasión el propio día de teroría del día 5 es toda la recapitulación que se puede hacer.
 
 Es un archivo extremadamente resumido.
 
 [Clase 5](./dia5.md)
+
+A lo ya expuesto en el resumen, habra que añadir, tratamiento de errores, que no se ha dado hasta ahora, hasta entender perfectamente el concepto.
+
+- Si recordamos bien, los callbacks podían volver con los parametros error, success... de tal forma que cuando no había errores lo que hacía era devolver el primer parametro a null.
+
+- Las promesas, sin embargo utilizan el orden inverso (sucess,ko).
+
+- ¿Y async await? -> async await utiliza try/catch:
+
+```javascript
+
+async function ejemplo(){
+  try{
+    const a = await funcionAsincrona();
+  }catch (err) { 
+    Promise.Reject(err);
+    // Throw "La cagamos"; <- otra forma
+  }
+}
+
+```
 
 # Manejo Básico del DOM
 
