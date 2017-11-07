@@ -258,3 +258,17 @@ fetch("http://www.example.org/submit.php", {
 https://www.programmableweb.com/category/all/apis
 
 https://github.com/toddmotto/public-apis
+
+# FETCH TESTEADO
+
+```javascript
+async function pilladatos () {
+  const url = 'https://randomuser.me/api/?results=10';
+  let firstData = await fetch(url);
+  let data = await firstData.json();
+  console.log(data);
+  return data  
+}
+
+```
+ 
