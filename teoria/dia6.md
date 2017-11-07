@@ -290,4 +290,35 @@ const datos = xhr.response
 // datos ya tiene lo que queremos
 
 ```
- 
+
+```javacript
+
+alert('HOLA MUNDO')
+
+const jsonData = [{ 
+                   name: "jose",
+                   surname: "gallego",
+                   age: 34,
+                 },
+                 {
+                   name: "brezo",
+                   surname: "alvarez",
+                   age: NaN,     
+                 },
+                 {
+                   name: "jacinto",
+                   surname:"isidro",
+                   age:40,  
+                 }];
+
+let pintame = document.getElementById("lista")
+
+jsonData.forEach(function(persona){
+    pintame.innerHTML += `<ul>
+    <li>${persona.name}</li>
+    <li>${persona.surname}</li>
+    <li>${persona.age}</li>
+      </ul>` 
+
+});
+```
