@@ -271,4 +271,23 @@ async function pilladatos () {
 }
 
 ```
+
+```javascript
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://api.github.com/users/josheriff');
+xhr.onload = function() {
+    if (xhr.status === 200) {
+        return xhr.responseText;
+    }
+    else {
+        return 'Request failed.  Returned status of ' + xhr.status ;
+    }
+};
+xhr.send();
+
+const datos = xhr.response
+
+// datos ya tiene lo que queremos
+
+```
  
