@@ -192,30 +192,21 @@ Escribir en consola y comentar resultados:
 
 **5 -** Diseña un programa que imprima los números impares entre un número dado por el usuario y los siguientes 50 números.
 ```
-	Proceso contador50Impares
-		Escribir "Dame un número:"
-		Leer numero
+	solucion con error de +1 en limite:
+	
+	function showOdds (number){
+	if(number % 2 != 0){
+		var limit = number + 50;
+		for(number;number<=limit;number=number+2){
+			console.log(number);
+		}
+	}	
+	else{
+		number++;
+		showOdds(number);	
 		
-		controlador = 1
-		
-		Escribir "Empieza la cuenta!"
-		
-		Mientras controlador <= 50 Hacer
-			
-			Si numero % 2 = 0 Entonces
-				numero <- numero + 1
-				controlador <- controlador + 1
-			Sino
-				Escribir numero
-				controlador <- controlador + 1
-				numero <- numero + 1
-			Fin Si
-			
-		Fin Mientras
-		
-		Escribir "Terminó la cuenta mágica..."
-		
-	FinProceso
+	}
+}
 ```
 
 **6 -** Diseña un programa que imprima la suma de los 50 primeros numeros pares y el total de números impares partiendo de un número dado por el usuario
@@ -452,3 +443,42 @@ Formato | Descripción
   console.log('Esto es aburrido...');
   console.log('%c Pero se puede mejorar fácilmente! ', 'background: #3EBDFF; color: #FFF; font-size:25px;');
  ```
+ 
+ # ANEXO EJERCICIO 5
+ 
+ Solucion de todos:
+ 
+ ```
+ function isPair(number){
+	if(number % 2 == 0){
+		return true
+	} else{
+		return false	
+	}
+	 
+}
+
+function showOdds (number){
+	var limit = number + 50;
+	
+	if(isPair(number)){
+			
+		number ++
+
+		for(number;number<limit;number= number+2){
+			console.log(number)
+			// number=number+2
+		
+		}
+	}	 
+	else {
+		for(number;number<=limit;number= number +2){
+			console.log(number)	
+		}
+	}
+	
+}
+ 
+ ```
+
+ - *%O* para objectos JS
