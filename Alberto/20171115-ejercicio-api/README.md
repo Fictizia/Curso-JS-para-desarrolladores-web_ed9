@@ -4,4 +4,5 @@
 
 https://developer.nytimes.com/geo_api_v2.json
 
-apikey: fc81a13f715849dba713a8d7e606183c
+## apikey
+fc81a13f715849dba713a8d7e606183c
