@@ -1,3 +1,27 @@
+async function getThisYear(){
+	let today = await new Date();
+	let thisYear = await today.getFullYear();
+	
+	await showYears(thisYear);
+	}
+
+async function showYears(upToThisYear){
+	
+	let allYears = '';
+	
+	for (i=1990; i <= upToThisYear; i++){
+		allYears += '<option value="' + i + '">' + i + '</option>';
+	}
+	
+	document.getElementById('years').innerHtml = allYears
+			
+	//console.log(document.getElementById(document.getElementById('years').innerHtml))
+	
+}
+
+getThisYear();
+
+/*
 let buscar = document.getElementById('buscar');
 buscar.addEventListener('click',function(){
 let valor = document.getElementById('anio').value;
