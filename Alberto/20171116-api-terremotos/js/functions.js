@@ -1,25 +1,29 @@
 async function getThisYear(){
-	let today = await new Date();
-	let thisYear = await today.getFullYear();
+	let today = await new Date(); //duelve la fecha de hoy
+	let thisYear = await today.getFullYear(); //extrae el año de today
 	
-	await showYears(thisYear);
+	await showYears(thisYear); //llama a la siguiente función
 	}
 
 async function showYears(upToThisYear){
 	
-	let allYears = '';
+	let allYears = [] //nuevo array donde almacenar los años
 	
 	for (i=1990; i <= upToThisYear; i++){
-		allYears += '<option value="' + i + '">' + i + '</option>';
+		allYears.push(i); //cada iteración llenará el array con un año
 	}
+    
+    let yearSelect = document.getElementById('years');
 	
-	document.getElementById('years').innerHtml = allYears
-			
-	//console.log(document.getElementById(document.getElementById('years').innerHtml))
-	
+    allYears.forEach( function(yearInAllYears){ //para cada año del array, añade un option al select
+        
+        yearSelect.innerHTML += `<option value="${yearInAllYears}"> ${yearInAllYears} </option>`
+    } );
+ 	
 }
 
 getThisYear();
+
 
 /*
 let buscar = document.getElementById('buscar');
