@@ -15,6 +15,8 @@ El concepto es un poco mas profundo que eso, comencemos estudiando las principal
 	- NPM modules
 	- Modulos nuestros
 - Filesystem
+	Repasemos estos conceptos y refactoricemos a nuestra manera:
+	[conceptos:](https://www.w3schools.com/nodejs/nodejs_filesystem.asp)
 - Hablar con una base de datos (conceptos)
 - Modelo MVC
 - Monolitico (node + motorPlantillas) vs API
