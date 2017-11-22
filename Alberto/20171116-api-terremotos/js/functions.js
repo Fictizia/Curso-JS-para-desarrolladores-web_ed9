@@ -1,17 +1,19 @@
-async function getThisYear(){
-	let today = await new Date(); //duelve la fecha de hoy
-	let thisYear = await today.getFullYear(); //extrae el año de today
+function getThisYear(){  //extrae el año actual
+	let today = new Date(); //devuelve la fecha de hoy
+	let thisYear = today.getFullYear(); //extrae el año de today
 	
-	await showYears(thisYear); //llama a la siguiente función
+	showYears(thisYear); //llama a la siguiente función
 	}
 
-async function showYears(upToThisYear){
+function showYears(upToThisYear){ //muestra en el select los años desde 1990 hasta la actualidad
 	
 	let allYears = [] //nuevo array donde almacenar los años
 	
 	for (i=1990; i <= upToThisYear; i++){
 		allYears.push(i); //cada iteración llenará el array con un año
 	}
+	
+	allYears.reverse();
     
     let yearSelect = document.getElementById('years');
 	
@@ -22,7 +24,66 @@ async function showYears(upToThisYear){
  	
 }
 
+function showMagnitude(){ //muestra las opciones del select de magnitudes
+	let magnitudes = [1,2,3,4,5,6,7,8];
+	
+	let selectMagnitudes = document.getElementById('magnitudes');
+	
+	magnitudes.forEach( function(magnitudeInMagnitudes){
+		selectMagnitudes.innerHTML += `<option value="${magnitudeInMagnitudes}">${magnitudeInMagnitudes}</option>`
+	})
+}
+
+function dataQuery(callback){ //recoge las opciones señaladas al pulsar "buscar" 
+	
+	const search = document.getElementById('search');
+	
+	search.addEventListener('mouseover', function(){ //pide ejecutar la llamada a la api por callback
+		
+		let yearOrigin = document.getElementById('years').value;
+		let minMagnitude = document.getElementById('magnitudes').value;
+		
+		callback(yearOrigin,minMagnitude);
+	})
+
+}
+
+async function getData(year,magnitude){ //hace la petición y convierte el resultado en json
+	let url = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson';
+    url += `&minmagnitude=${magnitude}&starttime=${year}0101`;
+		await console.log(url);	
+	data = await fetch(url);
+	dataJson = await data.json();
+	
+	await console.log(dataJson);
+	await showData(dataJson);
+	
+}
+
+function showData(data){
+	
+	eQuakes = data.features;
+	placeToShow = document.getElementById('data');
+	
+	placeToShow.innerHTML = `<h3>Encontrados ${eQuakes.length} terremotos</h3>`
+	
+	eQuakes.forEach( function(eQuakeInEquakes){
+		placeToShow.innerHTML += `
+		<ul><li>Fecha: ${eQuakeInEquakes.properties.time}</li>
+		<li>Localización: ${eQuakeInEquakes.properties.place}</li>
+		<li>Magnitud: ${eQuakeInEquakes.properties.mag}</li>
+		<li>MMI: ${eQuakeInEquakes.properties.mmi}</li>
+		<li><a href="${eQuakeInEquakes.properties.url}">Link al evento</li></ul>
+		`
+	})
+	
+}
+
+
 getThisYear();
+showMagnitude();
+dataQuery(getData);
+
 
 
 /*
