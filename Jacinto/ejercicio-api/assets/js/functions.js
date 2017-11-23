@@ -1,97 +1,119 @@
-function processRequest(){
+const find = document.getElementById("search");
 
-    clearScreen();
-    var pokemon = document.forms[0].elements[0].value;
+const cacheUser = cacheJS.use('array');
 
-    if(pokemon != ""){
-        
-        var init = { 
-                method: 'GET',
-                mode: 'cors',
-                cache: 'default' 
-            };
+find.addEventListener("click", function(){
     
-        const url = 'https://pokeapi.co/api/v2/pokemon/' + pokemon;
-        console.log(url);
-        fetch(url, init)
-            .then(function(response){
-                if(!response.ok){
-                    throw Error(response.statusText)
+    async function processRequest(pokemon){
+
+        if(pokemon != ""){
+            
+            if(cacheUser.get(pokemon)){
+                writePokemonInfo(cacheUser.get(pokemon));
+            }
+            else{
+                const url = 'https://pokeapi.co/api/v2/pokemon/' + pokemon;
+                console.log(url);
+                try {
+                    const data = await fetch(url, {mode: 'cors'});
+                    const objJson = await data.json();
+                    console.log(objJson);
+                    clearScreen();
+                    if(objJson.detail){
+                        writeWarning("Pokemon does not exist.");
+                    }
+                    else{
+                        const objPokemon = createPokemonObject(objJson);
+                        cacheUser.set(pokemon, objPokemon, 3600);
+                        writePokemonInfo(objPokemon);
+                    }
+                }catch(error){
+                    console.log(error);
+                    writeError("GET API ERROR!")
                 }
-                return response.json();
-            })
-            .then(function(json) {
-                console.log(json);
-                writePokemonInfo(json);
-            })
-            .catch(function(error) {
-                console.log(error);
-                writeErrorOrWarning(1, "Pokemon does not exist.")
-            }); 
+            }
+         }
+        else {
+            writeError("You must write a Pokemon name");
+        }
     }
-    else {
-        writeErrorOrWarning(0, "You must write a Pokemon name");
-    }
-    
-}
 
-function writeErrorOrWarning(flag, text){
+    let pokemon = document.getElementById("pokemonName").value;
+    processRequest(pokemon);
+});
+
+
+function writeError(text){
     const messageContainer = document.getElementById('message');
-
-    if(flag === 0){
-        messageContainer.innerHTML = `
+    messageContainer.innerHTML = `
         <div class="alert">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-        <strong>Error</strong>.` + text + 
-        `</div>`;
-        return;
-    }
-    
-    if(flag === 1){
-        messageContainer.innerHTML = `
-        <div class="warning">
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-        <strong>Warning</strong>.` + text + 
-        `</div>`;
-        return;
-    }
-    
+        <strong>Error: </strong>${text}</div>`;
 }
 
 
-function writePokemonInfo(json){
+function writeWarning(text){
+    const messageContainer = document.getElementById('message');
+    messageContainer.innerHTML = `
+        <div class="warning">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <strong>Warning: </strong>${text}</div>`;
+}
+
+
+function createPokemonObject(json){
+    let pokemon = {};
+
+    const types = json.types;
+    const pokemonTypes = types.map(function(elem){
+         return elem.type.name + ` `;
+    });
+
+    pokemon.name = json.name;
+    pokemon.imageDefault = json.sprites.front_default;
+    pokemon.id = json.id;
+    pokemon.specie = json.species.name;
+    pokemon.weight = json.weight;
+    pokemon.height = json.height;
+    pokemon.types = pokemonTypes;
+
+    return pokemon;
+}
+
+
+function writePokemonInfo(objPokemon){
+    
     const info = document.getElementById('results');
-    let tableCode = '';
-    tableCode = `
+    
+    let tableCode = `
     <table class="table table-striped table-bordered">
     <tr>
       <th colspan="2">Pokemon info</th>
     </tr>
     <tr>
-      <td><img src=${json.sprites.front_default} alt="Pokemon image"></td>
-      <td><strong>Pokedex order: </strong> ${json.order}</td>
+      <td><img src=${objPokemon.imageDefault} alt="Pokemon image"></td>
+      <td><strong>Pokedex order: </strong> ${objPokemon.id}</td>
     </tr>
     <tr>
-        <td><strong>Name: </strong> ${json.name}</td>
-        <td><strong>Species: </strong> ${json.species.name}</td>
+        <td><strong>Name: </strong> ${objPokemon.name}</td>
+        <td><strong>Species: </strong> ${objPokemon.specie}</td>
     </tr>
     <tr>
-        <td><strong>Weight: </strong> ${json.weight}</td>
-        <td><strong>Types: </strong>`;
-        json.types.forEach(function(elem){
-            tableCode += elem.type.name + ` `;
-        });
-    tableCode += `</td>
+        <td><strong>Weight: </strong> ${objPokemon.weight}</td>
+        <td><strong>Types: </strong> ${objPokemon.types}</td>
     </tr>
     <tr>
-        <td><strong>Height: </strong> ${json.height}</td>
+        <td><strong>Height: </strong> ${objPokemon.height}</td>
     <td></td>
     </tr>
   </table>`;
-  info.innerHTML = tableCode;
+  info.innerHTML = tableCode + info.innerHTML;
+  return tableCode;
 }
 
+
 function clearScreen(){
-    document.getElementById('results').innerHTML = "";
-    document.getElementById('message').innerHTML = "";
+    //document.getElementById('results').innerHTML = "";
+    document.getElementById('message').style.display = 'none';
 }
+
