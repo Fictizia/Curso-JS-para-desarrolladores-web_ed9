@@ -1,7 +1,7 @@
 # Conectando con la API de terremotos del USGS
 
 ## Link de la API
-https://earthquake.usgs.gov/fdsnws/event/1/query
+https://earthquake.usgs.gov/fdsnws/event/1
 
 ## Parámetros que se pueden pedir
 - Localización: format=geojson
