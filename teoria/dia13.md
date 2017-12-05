@@ -49,4 +49,13 @@ function clickJacinto(number){
 }
 
 clickJacinto(30);
+
+function clickNumberWithRange (number,range){
+    const end = number * range
+    for (let index = end - range ; index < end; index++){
+        console.log(a[index]);     
+    }
+}
+
+clickNumberWithRange(4,15);
 ```
