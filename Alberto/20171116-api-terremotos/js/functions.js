@@ -1,12 +1,12 @@
 const search = document.getElementById('search');
 	
-search.addEventListener('click', function(event){ //pide ejecutar la llamada a la api por callback
-		
+search.addEventListener('click', function(event){ 
     event.preventDefault(); //impide que el click refresque la página, tal como haría por defecto. el event es un parámetro que hace referencia al evento mencionado como primer parámetro del addEventListener, en este caso el 'click'
-    let yearOrigin = document.getElementById('years').value;
+    let yearOrigin = document.getElementById('start-years').value;
+    let yearEnd = document.getElementById('end-years').value;
     let minMagnitude = document.getElementById('magnitudes').value;
 		
-    getData(yearOrigin,minMagnitude);
+    getData(yearOrigin,yearEnd,minMagnitude);
 });
 
 
@@ -28,11 +28,16 @@ function showYears(upToThisYear){ //muestra en el select los años desde 1990 ha
 	
 	allYears.reverse();
     
-    let yearSelect = document.getElementById('years');
+    let yearSelectOrigin = document.getElementById('start-years');
+    
+    let yearSelectEnd = document.getElementById('end-years');
 	
     allYears.forEach( function(yearInAllYears){ //para cada año del array, añade un option al select
         
-        yearSelect.innerHTML += `<option value="${yearInAllYears}"> ${yearInAllYears} </option>`
+        yearSelectOrigin.innerHTML += `<option value="${yearInAllYears}"> ${yearInAllYears} </option>`;
+    
+    
+        yearSelectEnd.innerHTML += `<option value="${yearInAllYears}"> ${yearInAllYears} </option>`
     } );
  	
 }
@@ -47,10 +52,11 @@ function showMagnitude(){ //muestra las opciones del select de magnitudes
 	})
 }
 
-async function getData(year,magnitude){ //hace la petición y convierte el resultado en json
+async function getData(startYear, endYear, magnitude){ //hace la petición y convierte el resultado en json
 	let url = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson';
-    url += `&minmagnitude=${magnitude}&starttime=${year}0101`;
-		await console.log(url);	
+    url += `&minmagnitude=${magnitude}&starttime=${startYear}0101&endtime=${endYear}1231&orderby=time-asc`;
+    
+    console.log(url);	
 	let data = await fetch(url);
 	let dataJson = await data.json();
 	
@@ -65,8 +71,12 @@ function showData(data){
 	placeToShow.innerHTML = `<h3>Encontrados ${eQuakes.length} terremotos</h3>`
 	
 	eQuakes.forEach( function(eQuakeInEquakes){
+        
+        let eqDate = eQuakeInEquakes.properties.time
+        console.log(eqDate)
+        
 		placeToShow.innerHTML += `
-		<ul><li>Fecha: ${eQuakeInEquakes.properties.time}</li>
+		<ul><li>Fecha: ${eqDate}</li>
 		<li>Localización: ${eQuakeInEquakes.properties.place}</li>
 		<li>Magnitud: ${eQuakeInEquakes.properties.mag}</li>
 		<li>MMI: ${eQuakeInEquakes.properties.mmi}</li>
@@ -74,6 +84,8 @@ function showData(data){
 		`
 	});
 }
+
+
 
 
 getThisYear();
