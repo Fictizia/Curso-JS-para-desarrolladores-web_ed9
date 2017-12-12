@@ -42,6 +42,16 @@ function showYears(upToThisYear){ //muestra en el select los años desde 1990 ha
  	
 }
 
+function convertDate(utcSeconds){
+    
+    var d = new Date(utcSeconds); //crea un objeto con la fecha del evento y lo metemos en una variable
+    
+    realDate = d.toGMTString(); //convertimos a fecha normal
+    
+    return realDate;
+}
+
+
 function showMagnitude(){ //muestra las opciones del select de magnitudes
 	let magnitudes = [1,2,3,4,5,6,7,8];
 	
@@ -54,7 +64,7 @@ function showMagnitude(){ //muestra las opciones del select de magnitudes
 
 async function getData(startYear, endYear, magnitude){ //hace la petición y convierte el resultado en json
 	let url = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson';
-    url += `&minmagnitude=${magnitude}&starttime=${startYear}0101&endtime=${endYear}1231&orderby=time-asc`;
+    url += `&minmagnitude=${magnitude}&starttime=${startYear}0101&endtime=${endYear}1231&orderby=time`;
     
     console.log(url);	
 	let data = await fetch(url);
@@ -65,18 +75,19 @@ async function getData(startYear, endYear, magnitude){ //hace la petición y con
 
 function showData(data){
 	
-	eQuakes = data.features;
+	let eQuakes = data.features;    
+    console.log(eQuakes);
+    
 	placeToShow = document.getElementById('data');
 	
 	placeToShow.innerHTML = `<h3>Encontrados ${eQuakes.length} terremotos</h3>`
-	
+	    
 	eQuakes.forEach( function(eQuakeInEquakes){
         
         let eqDate = eQuakeInEquakes.properties.time
-        console.log(eqDate)
-        
+                
 		placeToShow.innerHTML += `
-		<ul><li>Fecha: ${eqDate}</li>
+		<ul><li>Fecha: ${ convertDate(eqDate) }</li>
 		<li>Localización: ${eQuakeInEquakes.properties.place}</li>
 		<li>Magnitud: ${eQuakeInEquakes.properties.mag}</li>
 		<li>MMI: ${eQuakeInEquakes.properties.mmi}</li>
