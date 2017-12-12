@@ -81,17 +81,27 @@ function showData(data){
 	placeToShow = document.getElementById('data');
 	
 	placeToShow.innerHTML = `<h3>Encontrados ${eQuakes.length} terremotos</h3>`
-	    
-	eQuakes.forEach( function(eQuakeInEquakes){
+    
+    let tenEQuakes = []
+    
+    for (i = 0; i <= 9; i++){
         
-        let eqDate = eQuakeInEquakes.properties.time
+        tenEQuakes.push( eQuakes[i] );
+    }
+    
+    console.log(tenEQuakes);
+    
+	    
+	tenEQuakes.forEach( function(eQuakeInTenEQuakes){
+        
+        let eqDate = eQuakeInTenEQuakes.properties.time
                 
 		placeToShow.innerHTML += `
 		<ul><li>Fecha: ${ convertDate(eqDate) }</li>
-		<li>Localización: ${eQuakeInEquakes.properties.place}</li>
-		<li>Magnitud: ${eQuakeInEquakes.properties.mag}</li>
-		<li>MMI: ${eQuakeInEquakes.properties.mmi}</li>
-		<li><a href="${eQuakeInEquakes.properties.url}">Link al evento</li></ul>
+		<li>Localización: ${eQuakeInTenEQuakes.properties.place}</li>
+		<li>Magnitud: ${eQuakeInTenEQuakes.properties.mag}</li>
+		<li>MMI: ${eQuakeInTenEQuakes.properties.mmi}</li>
+		<li><a href="${eQuakeInTenEQuakes.properties.url}">Link al evento</li></ul>
 		`
 	});
 }
