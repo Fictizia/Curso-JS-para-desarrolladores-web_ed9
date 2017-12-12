@@ -104,6 +104,15 @@ function showData(data){
 		<li><a href="${eQuakeInTenEQuakes.properties.url}">Link al evento</li></ul>
 		`
 	});
+    
+    showPages(eQuakes);
+}
+
+function showPages(data){
+    
+    let pages = document.getElementById('num-page');
+    pages.innerHTML = 'Página 1';
+    
 }
 
 
