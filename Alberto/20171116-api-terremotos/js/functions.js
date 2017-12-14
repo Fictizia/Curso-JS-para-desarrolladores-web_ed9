@@ -1,3 +1,16 @@
+const search = document.getElementById('search');
+	
+search.addEventListener('click', function(event){ 
+    event.preventDefault(); //impide que el click refresque la página, tal como haría por defecto. el event es un parámetro que hace referencia al evento mencionado como primer parámetro del addEventListener, en este caso el 'click'
+    let yearOrigin = document.getElementById('start-years').value;
+    let yearEnd = document.getElementById('end-years').value;
+    let minMagnitude = document.getElementById('magnitudes').value;
+		
+    getData(yearOrigin,yearEnd,minMagnitude);
+});
+
+
+
 function getThisYear(){  //extrae el año actual
 	let today = new Date(); //devuelve la fecha de hoy
 	let thisYear = today.getFullYear(); //extrae el año de today
@@ -15,14 +28,29 @@ function showYears(upToThisYear){ //muestra en el select los años desde 1990 ha
 	
 	allYears.reverse();
     
-    let yearSelect = document.getElementById('years');
+    let yearSelectOrigin = document.getElementById('start-years');
+    
+    let yearSelectEnd = document.getElementById('end-years');
 	
     allYears.forEach( function(yearInAllYears){ //para cada año del array, añade un option al select
         
-        yearSelect.innerHTML += `<option value="${yearInAllYears}"> ${yearInAllYears} </option>`
+        yearSelectOrigin.innerHTML += `<option value="${yearInAllYears}"> ${yearInAllYears} </option>`;
+    
+    
+        yearSelectEnd.innerHTML += `<option value="${yearInAllYears}"> ${yearInAllYears} </option>`
     } );
  	
 }
+
+function convertDate(utcSeconds){
+    
+    var d = new Date(utcSeconds); //crea un objeto con la fecha del evento y lo metemos en una variable
+    
+    realDate = d.toGMTString(); //convertimos a fecha normal
+    
+    return realDate;
+}
+
 
 function showMagnitude(){ //muestra las opciones del select de magnitudes
 	let magnitudes = [1,2,3,4,5,6,7,8];
@@ -34,131 +62,91 @@ function showMagnitude(){ //muestra las opciones del select de magnitudes
 	})
 }
 
-function dataQuery(callback){ //recoge las opciones señaladas al pulsar "buscar" 
-	
-	const search = document.getElementById('search');
-	
-	search.addEventListener('mouseover', function(){ //pide ejecutar la llamada a la api por callback
-		
-		let yearOrigin = document.getElementById('years').value;
-		let minMagnitude = document.getElementById('magnitudes').value;
-		
-		callback(yearOrigin,minMagnitude);
-	})
-
-}
-
-async function getData(year,magnitude){ //hace la petición y convierte el resultado en json
+async function getData(startYear, endYear, magnitude){ //hace la petición y convierte el resultado en json
 	let url = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson';
-    url += `&minmagnitude=${magnitude}&starttime=${year}0101`;
-		await console.log(url);	
-	data = await fetch(url);
-	dataJson = await data.json();
+    url += `&minmagnitude=${magnitude}&starttime=${startYear}0101&endtime=${endYear}1231&orderby=time`;
+    
+    console.log(url);	
+	let data = await fetch(url);
+	let dataJson = await data.json();
 	
-	await console.log(dataJson);
-	await showData(dataJson);
-	
+    await showData(dataJson);
 }
 
 function showData(data){
 	
-	eQuakes = data.features;
+	let eQuakes = data.features;    
+    console.log(eQuakes);
+    
 	placeToShow = document.getElementById('data');
 	
 	placeToShow.innerHTML = `<h3>Encontrados ${eQuakes.length} terremotos</h3>`
-	
-	eQuakes.forEach( function(eQuakeInEquakes){
-		placeToShow.innerHTML += `
-		<ul><li>Fecha: ${eQuakeInEquakes.properties.time}</li>
-		<li>Localización: ${eQuakeInEquakes.properties.place}</li>
-		<li>Magnitud: ${eQuakeInEquakes.properties.mag}</li>
-		<li>MMI: ${eQuakeInEquakes.properties.mmi}</li>
-		<li><a href="${eQuakeInEquakes.properties.url}">Link al evento</li></ul>
-		`
-	})
-	
+    
+    console.log(eQuakes);
+    
+    if ( eQuakes.length >= 10 ){
+        
+        let thisPageVal = 9 * 3;
+        
+        let numOfPages = Math.round( ( eQuakes.length / 10 ) + 0.4 ); //sumamos 0,4 para que en 2,1-2,4 suba a 2,5-2,9 y redondee a 3 (en 2,0 suba a 2,4 y redondea a 2)
+        
+        console.log( numOfPages );
+        
+        placeToShow.innerHTML += `<p>${ numOfPages } páginas con resultados</p>`
+        
+        placeToShow.innerHTML += `<p>Mostrando del ${ thisPageVal - 8 } al ${ thisPageVal + 1 }</p>`
+        
+        for ( let i = ( thisPageVal - 9 ) ; i <= thisPageVal ; i++ ){
+            
+            
+            
+            let eqDate = eQuakes[i].properties.time
+
+            placeToShow.innerHTML += `
+            <ul><li>Fecha: ${ convertDate(eqDate) }</li>
+            <li>Localización: ${eQuakes[i].properties.place}</li>
+            <li>Magnitud: ${eQuakes[i].properties.mag}</li>
+            <li>MMI: ${eQuakes[i].properties.mmi}</li>
+            <li><a href="${eQuakes[i].properties.url}">Link al evento</li></ul>
+            ` 
+        }  
+    
+    }
+    
+//    for ( i = 0; i <= 9; i++ ){
+//
+//        let eqDate = eQuakes[i].properties.time
+//
+//        placeToShow.innerHTML += `
+//        <ul><li>Fecha: ${ convertDate(eqDate) }</li>
+//        <li>Localización: ${eQuakes[i].properties.place}</li>
+//        <li>Magnitud: ${eQuakes[i].properties.mag}</li>
+//        <li>MMI: ${eQuakes[i].properties.mmi}</li>
+//        <li><a href="${eQuakes[i].properties.url}">Link al evento</li></ul>
+//        ` 
+//    }
 }
+    
+    
+    //SIN PAGINACIÓN
+    
+	/*eQuakes.forEach( function(eQuakeinEQuakes){
+        
+        let eqDate = eQuakeinEQuakes.properties.time
+                
+		placeToShow.innerHTML += `
+		<ul><li>Fecha: ${ convertDate(eqDate) }</li>
+		<li>Localización: ${eQuakeinEQuakes.properties.place}</li>
+		<li>Magnitud: ${eQuakeinEQuakes.properties.mag}</li>
+		<li>MMI: ${eQuakeinEQuakes.properties.mmi}</li>
+		<li><a href="${eQuakeinEQuakes.properties.url}">Link al evento</li></ul>
+		`
+	});*/
+    
+
 
 
 getThisYear();
 showMagnitude();
-dataQuery(getData);
 
 
-
-/*
-let buscar = document.getElementById('buscar');
-buscar.addEventListener('click',function(){
-let valor = document.getElementById('anio').value;
-alert(valor);
-})
-
-
-
-
-function collectQuery(){
-    year = document.eqForm.anio.value;
-    alert('Hola');
-    getData(year);
-}
-
-
-
-async function getData(b){
-    let url = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson';
-    //url += '&minmagnitude=' + a;
-    url += '&starttime=' + b + '0101';
-    
-    data = await fetch(url);
-    dataJson = await data.json();
-    
-    await getEQ(dataJson);
-    
-}
-
-async function getEQ(a){
-    eQuakes = a.features;
-    
-    await showProperties(eQuakes);
-}
-
-
-/* MEDIANTE BUCLE FOR 
-async function showProperties(a){    
-    for (i=0; i<= a.length; i++){
-        document.write(`
-            <ul>
-                <li>Terremoto ${i+1}: </li>
-                <li>Magnitud: ${a[i].properties.mag}</li>
-                <li>Localización: ${a[i].properties.place}</li>
-            </ul>
-            `)
-    }
-}
-
-*/
-
-
-
-/* MEDIANTE FOR EACH */
-
-async function showProperties(a){ 
-    // tenemos un array, con objetos dentro
-    // cada elmento del array quiero pintar
-    // elemento.properties.mag
-    // elemento.properties.place
-    
-    
-    a.forEach(function(terremotoEnArray,index){
-       document.write(`
-            <ul>
-                <li>Terremoto ${index+1}: </li>
-                <li>Magnitud: ${terremotoEnArray.properties.mag}</li>
-                <li>Localización: ${terremotoEnArray.properties.place}</li>
-            </ul>
-            `)
-    })
-}
-
-
-//getData(7,20170101); 

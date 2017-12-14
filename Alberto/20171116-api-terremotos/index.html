@@ -12,14 +12,18 @@
         
         <div class="container">
             <h1>Buscador de terremotos</h1>
-            <p>Rellena los siguientes campos:</p>
+            <p>Rellena los siguientes campos y pulsa BUSCAR:</p>
             
             <form name="eqForm" >
                 
                 <!--<p>Magnitud mínima:</p>
                 <input type="circle" value="0">-->
                 <p>Desde qué año</p>
-                    <select id="years">                    
+                    <select id="start-years">                    
+                    </select>
+                
+                <p>Hasta qué año</p>
+                    <select id="end-years">                    
                     </select>
 					
 					<p>Magnitud mínima</p>
@@ -31,10 +35,9 @@
             
             </form>
 			
-			<div id="data">
-			
-			
-			</div>
+			<div id="data"></div>
+            
+            <div id="num-page"></div>
         
         
         
